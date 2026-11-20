@@ -1,0 +1,15 @@
+---
+import Base from "../layouts/Base.astro";
+import { clinic } from "../data/clinic";
+const main = clinic.phones[0];
+---
+<Base lang="uk" title="Сторінку не знайдено — Формула Дент" description="Такої сторінки немає. Поверніться на головну або зателефонуйте в клініку.">
+  <header class="site-header" slot="header"><div class="container site-header__row"><a class="logo" href="/" aria-label="Формула Дент, на головну"><img src="/images/logo-200.webp" width="200" height="38" alt="Формула Дент, стоматологія" /></a></div></header>
+  <section class="hero">
+    <div class="container">
+      <h1>Такої сторінки немає</h1>
+      <p class="hero__lead">Поверніться на головну або зателефонуйте нам, і ми допоможемо записатися.</p>
+      <p class="hero__lead"><a class="btn btn--primary" href="/">На головну</a> <a class="btn btn--secondary" href={main.href}>{main.label}</a></p>
+    </div>
+  </section>
+</Base>

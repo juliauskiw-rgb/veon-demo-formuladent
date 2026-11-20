@@ -1,0 +1,30 @@
+---
+import FutureLink from "./FutureLink.astro";
+import { person, type Service } from "../data/clinic";
+interface Props { s: Service; }
+const { s } = Astro.props;
+const people = s.who.map(person);
+---
+<li class="svc">
+  <p class="svc__line">
+    <FutureLink note="Розділ у розробці" class="svc__topic">{s.topic}</FutureLink>
+    {s.verb && <span> {s.verb} </span>}
+    <span class="who-group">
+      {people.map((p, i) => (
+        <>
+        {i > 0 && <span class="who-and">і</span>}
+        <span class="who-wrap">
+          <span class="who">
+            <img class="who__face" src={`/images/h-${p.key}-112.webp`} width="112" height="112" alt="" loading="lazy" decoding="async" />
+            <span class="who__name">{p.short}</span>
+            {s.whoRole && <span class="who__role">{s.whoRole}</span>}
+          </span>
+        </span>
+        </>
+      ))}
+    </span>
+  </p>
+  <p class="svc__price tnum">
+    {s.price.map((line) => <span>{line}</span>)}
+  </p>
+</li>

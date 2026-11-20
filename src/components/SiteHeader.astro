@@ -1,0 +1,45 @@
+---
+import Icon from "./Icon.astro";
+import { clinic } from "../data/clinic";
+const main = clinic.phones[0];
+const links = [
+  { href: "#napryamky", label: "Послуги і ціни" },
+  { href: "#likari", label: "Лікарі" },
+  { href: "#pidkhid", label: "Як ми лікуємо" },
+  { href: "#kontakty", label: "Контакти" },
+];
+---
+<header class="site-header" data-rec="R-211,R-203">
+  <div class="container site-header__row">
+    <a class="logo" href="#top" aria-label="Формула Дент, на початок сторінки">
+      <img src="/images/logo-200.webp" srcset="/images/logo-200.webp 200w, /images/logo-400.webp 400w" sizes="190px" width="200" height="38" alt="Формула Дент, стоматологія" />
+    </a>
+    <nav class="nav-desktop" aria-label="Розділи сторінки">
+      <ul role="list">
+        {links.map((l) => <li><a class="nav-link" href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="header-phone" href={main.href}>{main.label}</a>
+      <a class="btn btn--primary btn--header" href={main.href} data-rec="R-216">Записатися</a>
+      <a class="btn btn--primary btn--icon" href={main.href} aria-label={`Зателефонувати ${main.label}`} data-rec="R-216"><Icon name="phone" size={22} /></a>
+      <details class="menu" data-menu>
+        <summary class="icon-btn menu__toggle" aria-label="Меню">
+          <Icon name="menu" size={24} class="menu__open" />
+          <Icon name="close" size={24} class="menu__close" />
+        </summary>
+        <div class="menu__panel">
+          <nav aria-label="Розділи сторінки, мобільне меню">
+            <ul role="list" class="menu__links">
+              {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+            </ul>
+          </nav>
+          <ul role="list" class="menu__contacts">
+            {clinic.phones.map((p) => <li><a href={p.href}><Icon name="phone" />{p.label}</a><span class="list-sep" aria-hidden="true">;</span></li>)}
+            <li><a href={clinic.telegram} rel="noopener" target="_blank"><Icon name="telegram" />Написати в Telegram</a></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

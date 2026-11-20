@@ -1,0 +1,30 @@
+---
+import FutureLink from "./FutureLink.astro";
+import { clinic } from "../data/clinic";
+const future = ["Послуги", "Весь прайс", "Корисна інформація", "Політика конфіденційності"];
+---
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="logo" href="#top" aria-label="Формула Дент, на початок сторінки">
+        <img src="/images/logo-200.webp" srcset="/images/logo-200.webp 200w, /images/logo-400.webp 400w" sizes="190px" width="200" height="38" alt="Формула Дент, стоматологія" loading="lazy" decoding="async" />
+      </a>
+      <p>Сімейна стоматологія у Львові.<br />{clinic.address.street}.</p>
+    </div>
+    <ul role="list" class="site-footer__col">
+      {clinic.phones.map((p) => <li><a class="tnum" href={p.href}>{p.label}</a><span class="list-sep" aria-hidden="true">;</span></li>)}
+      <li><a href={clinic.email.href}>{clinic.email.label}</a></li>
+    </ul>
+    <ul role="list" class="site-footer__col">
+      <li><a href={clinic.telegram} rel="noopener" target="_blank">Telegram</a></li>
+      <li><a href={clinic.instagram} rel="noopener" target="_blank">Instagram</a></li>
+      <li><a href={clinic.facebook} rel="noopener" target="_blank">Facebook</a></li>
+    </ul>
+    <ul role="list" class="site-footer__col">
+      {future.map((f) => <li><FutureLink note="Розділ у розробці">{f}</FutureLink></li>)}
+    </ul>
+  </div>
+  <div class="container site-footer__legal">
+    <p>{clinic.copyright}</p>
+  </div>
+</footer>

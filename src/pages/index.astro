@@ -1,0 +1,145 @@
+---
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import Icon from "../components/Icon.astro";
+import FutureLink from "../components/FutureLink.astro";
+import ServiceRow from "../components/ServiceRow.astro";
+import DoctorCard from "../components/DoctorCard.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { clinic, services, team } from "../data/clinic";
+
+const main = clinic.phones[0];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  name: "Стоматологія Формула Дент",
+  address: { "@type": "PostalAddress", streetAddress: "вул. Івана Пулюя, 40, корпус 4", addressLocality: "Львів", addressCountry: "UA" },
+  telephone: clinic.phones.map((p) => p.e164),
+  email: clinic.email.label,
+  openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "20:00" }],
+  sameAs: [clinic.instagram, clinic.facebook, clinic.telegram],
+};
+const title = "Сімейна стоматологія у Львові — Формула Дент, вул. Пулюя, 40";
+const description = "Лікування дорослих і дітей однією командою: терапія, канали під мікроскопом, хірургія й імплантація, протезування, ортодонтія. Ціни, лікарі, запис за телефоном.";
+---
+<Base lang="uk" title={title} description={description}>
+  <SiteHeader slot="header" />
+
+  <Section id="hero" rec="R-212" class="hero">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <h1 data-rec="R-103,MA-R001,G-R002">Сімейна стоматологія у Львові, де вас знають на ім'я</h1>
+        <p class="hero__lead">Дорослих і дітей лікує одна команда: терапевт, хірург, ортопед, ортодонт.</p>
+      </div>
+      <div class="hero__book" data-rec="R-216,S-R016">
+        <a class="hero__phone" href={main.href}>{main.label}</a>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--wide" href={main.href}>
+            <Icon name="phone" class="btn__icon" />
+            <span class="only-desktop">Записатися</span>
+            <span class="only-mobile">Зателефонувати <span class="btn__num">{main.label}</span></span>
+          </a>
+          <a class="btn btn--secondary btn--wide" href={clinic.telegram} rel="noopener" target="_blank">
+            <Icon name="telegram" class="btn__icon" />Написати в Telegram
+          </a>
+        </div>
+        <p class="hero__where">
+          <span>{clinic.address.short}</span>
+          <span>Пн–Пт 9:00–20:00, субота за записом</span>
+        </p>
+      </div>
+      <figure class="hero__photo">
+        <picture>
+          <source media="(min-width: 48rem)" type="image/webp" srcset="/images/team-wide-640.webp 640w, /images/team-wide-1000.webp 1000w" sizes="(min-width: 90rem) 1280px, calc(100vw - 5rem)" width="1000" height="437" />
+          <img src="/images/team-4x3-780.webp" srcset="/images/team-4x3-420.webp 420w, /images/team-4x3-780.webp 780w" sizes="calc(100vw - 2.5rem)" width="780" height="585" alt="Команда стоматології Формула Дент у білій формі: лікарі та адміністратор" fetchpriority="high" decoding="async" data-rec="R-206" />
+        </picture>
+        <figcaption>Команда Формула Дент</figcaption>
+      </figure>
+    </div>
+  </Section>
+
+  <Section id="napryamky" rec="R-214,S-R017" class="svcs">
+    <div class="container">
+      <div class="svcs__head">
+        <h2>Хто і що у нас лікує</h2>
+        <p class="svcs__intro">Кожен напрямок веде свій лікар. Ціни з прайсу клініки.</p>
+      </div>
+      <ul role="list" class="svcs__list">
+        {services.map((s) => <ServiceRow s={s} />)}
+      </ul>
+      <div class="svcs__foot">
+        <p class="svcs__note">Валютні ціни сплачуються в гривні за курсом.</p>
+        <FutureLink note="Розділ у розробці" class="svcs__all">Весь прайс</FutureLink>
+        <a class="btn btn--primary" href={main.href} data-rec="R-216"><Icon name="phone" class="btn__icon" />Записатися на огляд</a>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="likari" class="team">
+    <div class="container">
+      <div class="team__head">
+        <h2>Вісім людей, яких ви знатимете на імʼя</h2>
+        <p class="team__intro">Досвід лікарів — від 4 до 20 років.</p>
+        <a class="btn btn--secondary team__cta" href={main.href} data-rec="R-216"><Icon name="phone" class="btn__icon" />Записатися до лікаря</a>
+      </div>
+      <ul role="list" class="team__grid">
+        {team.map((p, i) => <DoctorCard p={p} i={i} />)}
+      </ul>
+    </div>
+  </Section>
+
+  <Section id="pidkhid" class="way">
+    <div class="container">
+      <h2 class="way__title">Як ми лікуємо</h2>
+      <p class="way__statement">План лікування складає одна команда: терапевт, хірург, ортопед і ортодонт. Спершу шукаємо, як зберегти зуб.</p>
+      <dl class="way__facts">
+        <div><dt>Мікроскоп</dt><dd>Канали та складні випадки лікуємо під збільшенням.</dd></div>
+        <div><dt>Радіовізіограф</dt><dd>Прицільні рентген-знімки зуба перед лікуванням.</dd></div>
+        <div><dt>Стерилізація</dt><dd>Безпека пацієнта починається з чистих інструментів.</dd></div>
+        <div><dt>Матеріали</dt><dd>Українські, американські, німецькі та японські.</dd></div>
+      </dl>
+    </div>
+  </Section>
+
+  <Section id="kontakty" class="contact" rec="R-216">
+    <div class="container contact__grid">
+      <div class="contact__call">
+        <h2>Запишіться так, як вам зручно</h2>
+        <ul role="list" class="contact__phones">
+          {clinic.phones.map((p) => <li><a class="contact__phone tnum" href={p.href}>{p.label}</a><span class="list-sep" aria-hidden="true">;</span></li>)}
+        </ul>
+        <div class="contact__links">
+          <a class="btn btn--on-accent" href={clinic.telegram} rel="noopener" target="_blank"><Icon name="telegram" class="btn__icon" />Написати в Telegram</a>
+          <a class="contact__mail" href={clinic.email.href}><Icon name="mail" />{clinic.email.label}</a>
+        </div>
+      </div>
+      <div class="contact__where">
+        <h3 class="contact__label">Адреса</h3>
+        <address class="contact__address">{clinic.address.city},<br />{clinic.address.street}</address>
+        <a class="contact__route" href={clinic.maps} rel="noopener" target="_blank" data-rec="R-204,S-R018"><Icon name="route" />Прокласти маршрут</a>
+        <h3 class="contact__label">Години роботи</h3>
+        <table class="contact__hours">
+          <caption class="visually-hidden">Години роботи клініки</caption>
+          <tbody>
+            {clinic.hours.map((h) => <tr><th scope="row">{h.day}</th><td class="tnum">{h.time}</td></tr>)}
+          </tbody>
+        </table>
+        <ul role="list" class="contact__social">
+          <li><a href={clinic.instagram} rel="noopener" target="_blank"><Icon name="instagram" />Instagram</a></li>
+          <li><a href={clinic.facebook} rel="noopener" target="_blank"><Icon name="facebook" />Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <SiteFooter slot="footer" />
+
+  <nav class="call-bar" aria-label="Швидкий звʼязок" slot="after" data-rec="R-216">
+    <a class="btn btn--primary" href={main.href}><Icon name="phone" class="btn__icon" />Подзвонити</a>
+    <a class="btn btn--secondary" href={clinic.telegram} rel="noopener" target="_blank"><Icon name="telegram" class="btn__icon" />Telegram</a>
+  </nav>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+  <script src="../scripts/site.ts"></script>
+</Base>

@@ -1,0 +1,15 @@
+---
+// Line icons, 1.5px stroke, colour of the text (concept §5 «Изображения и иконки»). Decorative: aria-hidden.
+interface Props { name: "phone" | "telegram" | "mail" | "route" | "instagram" | "facebook" | "menu" | "close"; size?: number; class?: string; }
+const { name, size = 20, class: cls } = Astro.props;
+---
+<svg class:list={["icon", cls]} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {name === "phone" && <path d="M5.5 3.5h3l1.5 4-2 1.25a11 11 0 0 0 6.25 6.25L15.5 13l4 1.5v3a2 2 0 0 1-2 2A15 15 0 0 1 3.5 5.5a2 2 0 0 1 2-2Z" />}
+  {name === "telegram" && <path d="M20.5 4.5 3.5 11l5.5 2 2 6 3-4 4.5 3.5 2-14Zm-11.5 8.5 8-5.5" />}
+  {name === "mail" && <><rect x="3.5" y="5.5" width="17" height="13" rx="1.5" /><path d="m4 6.5 8 6 8-6" /></>}
+  {name === "route" && <><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z" /><circle cx="12" cy="10" r="2.25" /></>}
+  {name === "instagram" && <><rect x="3.5" y="3.5" width="17" height="17" rx="5" /><circle cx="12" cy="12" r="4" /><path d="M17.25 6.75h.01" /></>}
+  {name === "facebook" && <path d="M14.5 8.5h2.5v-4h-2.5a4 4 0 0 0-4 4v2.5h-2.5v4h2.5v6h4v-6h2.5l.5-4h-3V9a.5.5 0 0 1 .5-.5Z" />}
+  {name === "menu" && <path d="M4 7.5h16M4 12h16M4 16.5h16" />}
+  {name === "close" && <path d="M6 6l12 12M18 6 6 18" />}
+</svg>
