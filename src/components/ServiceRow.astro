@@ -1,6 +1,7 @@
 ---
 import FutureLink from "./FutureLink.astro";
 import { person, type Service } from "../data/clinic";
+const B = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 interface Props { s: Service; }
 const { s } = Astro.props;
 const people = s.who.map(person);
@@ -15,7 +16,7 @@ const people = s.who.map(person);
         {i > 0 && <span class="who-and">і</span>}
         <span class="who-wrap">
           <span class="who">
-            <img class="who__face" src={`/images/h-${p.key}-112.webp`} width="112" height="112" alt="" loading="lazy" decoding="async" />
+            <img class="who__face" src={`${B}images/h-${p.key}-112.webp`} width="112" height="112" alt="" loading="lazy" decoding="async" />
             <span class="who__name">{p.short}</span>
             {s.whoRole && <span class="who__role">{s.whoRole}</span>}
           </span>

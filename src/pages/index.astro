@@ -8,6 +8,7 @@ import ServiceRow from "../components/ServiceRow.astro";
 import DoctorCard from "../components/DoctorCard.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { clinic, services, team } from "../data/clinic";
+const B = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 
 const main = clinic.phones[0];
 const jsonLd = {
@@ -51,8 +52,8 @@ const description = "Лікування дорослих і дітей одні�
       </div>
       <figure class="hero__photo">
         <picture>
-          <source media="(min-width: 48rem)" type="image/webp" srcset="/images/team-wide-640.webp 640w, /images/team-wide-1000.webp 1000w" sizes="(min-width: 90rem) 1280px, calc(100vw - 5rem)" width="1000" height="437" />
-          <img src="/images/team-4x3-780.webp" srcset="/images/team-4x3-420.webp 420w, /images/team-4x3-780.webp 780w" sizes="calc(100vw - 2.5rem)" width="780" height="585" alt="Команда стоматології Формула Дент у білій формі: лікарі та адміністратор" fetchpriority="high" decoding="async" data-rec="R-206" />
+          <source media="(min-width: 48rem)" type="image/webp" srcset={`${B}images/team-wide-640.webp 640w, ${B}images/team-wide-1000.webp 1000w`} sizes="(min-width: 90rem) 1280px, calc(100vw - 5rem)" width="1000" height="437" />
+          <img src={`${B}images/team-4x3-780.webp`} srcset={`${B}images/team-4x3-420.webp 420w, ${B}images/team-4x3-780.webp 780w`} sizes="calc(100vw - 2.5rem)" width="780" height="585" alt="Команда стоматології Формула Дент у білій формі: лікарі та адміністратор" fetchpriority="high" decoding="async" data-rec="R-206" />
         </picture>
         <figcaption>Команда Формула Дент</figcaption>
       </figure>

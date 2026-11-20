@@ -1,11 +1,12 @@
 ---
 import type { Person } from "../data/clinic";
+const B = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 interface Props { p: Person; i: number; }
 const { p, i } = Astro.props;
 ---
 <li class="doc" data-reveal style={`--reveal-delay:${(i % 4) * 60}ms`}>
   <div class="doc__photo">
-    <img src={`/images/p-${p.key}-400.webp`} width="400" height="500" alt={`${p.full}, ${p.role.toLowerCase()}`} loading="lazy" decoding="async" />
+    <img src={`${B}images/p-${p.key}-400.webp`} width="400" height="500" alt={`${p.full}, ${p.role.toLowerCase()}`} loading="lazy" decoding="async" />
   </div>
   <h3 class="doc__role">{p.role}</h3>
   <p class="doc__name">{p.full}</p>

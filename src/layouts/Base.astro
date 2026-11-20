@@ -1,4 +1,5 @@
 ---
+import piazzollaPreload from '../assets/fonts/piazzolla-cyrillic-500-normal.woff2?url';
 import "../styles/tokens.css";
 import "../styles/global.css";
 import "../styles/site.css";
@@ -21,7 +22,7 @@ const { lang, title, description, canonical } = Astro.props;
     <meta property="og:locale" content="uk_UA" />
     <meta name="robots" content="noindex" />
     <link rel="icon" href="data:," />
-    <link rel="preload" href="/fonts/piazzolla-cyrillic-500-normal.woff2" as="font" type="font/woff2" crossorigin data-rec="R-205" />
+    <link rel="preload" href={piazzollaPreload} as="font" type="font/woff2" crossorigin data-rec="R-205" />
     <slot name="head" />
     <style is:global>html { overflow-x: clip; } body { overflow-x: clip; }</style>
   </head>

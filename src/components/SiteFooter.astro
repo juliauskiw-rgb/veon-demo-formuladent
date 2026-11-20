@@ -1,13 +1,14 @@
 ---
 import FutureLink from "./FutureLink.astro";
 import { clinic } from "../data/clinic";
+const B = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 const future = ["Послуги", "Весь прайс", "Корисна інформація", "Політика конфіденційності"];
 ---
 <footer class="site-footer">
   <div class="container site-footer__grid">
     <div class="site-footer__brand">
       <a class="logo" href="#top" aria-label="Формула Дент, на початок сторінки">
-        <img src="/images/logo-200.webp" srcset="/images/logo-200.webp 200w, /images/logo-400.webp 400w" sizes="190px" width="200" height="38" alt="Формула Дент, стоматологія" loading="lazy" decoding="async" />
+        <img src={`${B}images/logo-200.webp`} srcset={`${B}images/logo-200.webp 200w, ${B}images/logo-400.webp 400w`} sizes="190px" width="200" height="38" alt="Формула Дент, стоматологія" loading="lazy" decoding="async" />
       </a>
       <p>Сімейна стоматологія у Львові.<br />{clinic.address.street}.</p>
     </div>
